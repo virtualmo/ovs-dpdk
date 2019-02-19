@@ -9,6 +9,9 @@ Qemu Version: 2.5.0
 
 The script will also create two openvswitch bridges and two vhost-user ports that can be attached to the Guest VM.
 
+Example Setup will look like the following:
+![Example](https://raw.githubusercontent.com/mohanadelamin/ovs-dpdk/master/Setup.png)
+
 ## Usage
 
 1- Run the script on fresh ubuntu 16.04.1
