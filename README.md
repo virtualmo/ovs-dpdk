@@ -35,3 +35,14 @@ sudo ./ovs-dpdk.sh eth0 eth1
 		<driver name=’vhost’ qeueus=’8’>
     </interface>
 ```
+
+3- Add the following Numa setting to your guest VM xml file.
+```bash
+ <cpu mode='host-model'>
+    <model fallback='allow'/>
+    <numa>
+      <cell id='0' cpus='0,2,4,6' memory='8388608' unit='KiB' memAccess='shared'/>
+      <cell id='1' cpus='1,3,5,7' memory='8388608' unit='KiB' memAccess='shared'/>
+    </numa>
+  </cpu>
+```
