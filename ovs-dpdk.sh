@@ -217,3 +217,13 @@ echo "
 		<model type='virtio'/>
 		<driver name=’vhost’ qeueus=’8’>
     </interface>"
+echo "You also need to add the following NUMA setting to the Guest VM XML."
+echo "
+ <cpu mode='host-model'>
+    <model fallback='allow'/>
+    <numa>
+      <cell id='0' cpus='0,2,4,6' memory='8388608' unit='KiB' memAccess='shared'/>
+      <cell id='1' cpus='1,3,5,7' memory='8388608' unit='KiB' memAccess='shared'/>
+    </numa>
+  </cpu>
+"
