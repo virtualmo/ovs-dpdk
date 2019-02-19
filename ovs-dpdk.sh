@@ -132,7 +132,8 @@ wget http://openvswitch.org/releases/openvswitch-2.5.1.tar.gz
 echo "Compiling and installing openvswitch v2.2.0"
 tar xzvf openvswitch-2.5.1.tar.gz
 cd openvswitch-2.5.1
-./configure --with-dpdk="~/tmp/dpdk-2.2.0/x86_64-native-linuxapp-gcc/"
+DPDK_PATH=$(realpath ~/tmp/dpdk-2.2.0/x86_64-native-linuxapp-gcc/)
+./configure --with-dpdk="$DPDK_PATH"
 make
 make install
 
@@ -149,7 +150,7 @@ mount -t hugetlbfs hugetlbfs /dev/hugepages/libvirt/qemu
 killall ovsdb-server ovs-vswitchd
 
 
-echo "initializing the openvswitch Database"
+echo "Initializing the openvswitch Database"
 mkdir -p /usr/local/etc/openvswitch 2>/dev/null 
 mkdir -p /usr/local/var/run/openvswitch 2>/dev/null 
 rm -f /var/run/openvswitch/vhost-user* 2>/dev/null 
@@ -163,7 +164,7 @@ ovsdb-server --remote=punix:/usr/local/var/run/openvswitch/db.sock \
 --bootstrap-ca-cert=db:Open_vSwitch,SSL,ca_cert \
 --pidfile --detach
 
-echo "initializing the openvswitch with DPDK"
+echo "Initializing the openvswitch with DPDK"
 ovs-vsctl --no-wait init
 export DB_SOCK=/usr/local/var/run/openvswitch/db.sock
 
